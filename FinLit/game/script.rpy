@@ -4,11 +4,18 @@
 # name of the character.
 
 define l = Character("Leon", image="leon")
+define p = Character("[pname]", color="#1aa7ec")
+
 
 # The game starts here.
 
 label start:
-
+    $ pname = renpy.input("What would you like to be called as?: ", length=45)
+    #$ pc = renpy.input("Choose color -pink or blue?: ")
+    #if pc.lower() == "blue":
+    #    $ pcolor = "#1aa7ec"
+    #else:
+    #    $ pcolor = "#1aa7ec"
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
@@ -23,9 +30,9 @@ label start:
 
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
+    p "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    l "Once you add a story, pictures, and music, you can release it to the world!"
 
     # This ends the game.
 
