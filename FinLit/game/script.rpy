@@ -3,8 +3,7 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
-
+define l = Character("Leon", image="leon")
 
 # The game starts here.
 
