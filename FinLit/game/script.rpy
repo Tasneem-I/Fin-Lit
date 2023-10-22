@@ -5,6 +5,10 @@
 
 define l = Character("Leon", image="leon")
 define p = Character("[pname]", color="#7e538f")
+define i = Character("Insurance Agent", color="#3c3235ff")
+define n = Character("Hospital Receptionist", color="#b19fff")
+define a = Character("Bank Representative", color="#f4f486")
+
 default A = False
 default B = False
 default C = False
@@ -17,6 +21,13 @@ default s_500 = False
 default s_1500 = False
 default reg_dec =False
 default b_end = False
+default flex = False
+default cred = False
+default emf = False
+default hcover = False
+default mcover = False
+default lcover = False
+
 # The game starts here.
 
 label start:
@@ -87,10 +98,9 @@ label scene1:
 label scene2:
     scene bg apmt door
     "Leon stands in front of his new apartment building, key in hand. Excitement fills the air as he opens the door to his new home."
-    hide bg apmt door with dissolve
     scene bg new room
     if A:
-        l"This is it! My own place, right near work. No more long commutes"
+        l frowning "This is it! My own place, right near work. No more long commutes"
         pause 0.3
         p "A great choice! But remember, with great convenience comes greater responsibility. Let's plan your budget and prioritize your expenses."
         pause 0.3
@@ -98,7 +108,7 @@ label scene2:
         scene bg desk
         "Leon sits at a desk with bills and a calculator"
         pause
-        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l frowning "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "Let's break it down. After paying rent, you have $2,200 left. How would you like to distribute this?"
         pause 0.5
@@ -124,14 +134,14 @@ label scene2:
                 $ s_500 = True
                 jump scene3
     elif B:
-        l"This place might be a bit far, but it's affordable. Let's make it home."
+        l frowning "This place might be a bit far, but it's affordable. Let's make it home."
         pause 0.3
         p "A practical choice! Now, let's plan your budget and make sure you're set for the month."
         pause 0.3
         scene bg desk
         "Leon sits at a makeshift desk with bills and a calculator."
         pause 
-        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l frowning "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "After paying rent, insurance, and other essentials, you have $2,700 left. How would you like to distribute this?"
         pause 0.6
@@ -157,14 +167,14 @@ label scene2:
                 $ s_500 = True
                 jump scene3
     elif C:
-        l"A balanced choice. Let's make this place feel like home without breaking the bank"
+        l frowning "A balanced choice. Let's make this place feel like home without breaking the bank"
         pause 0.3
         p "A thoughtful decision! Now, let's plan your budget and ensure you're financially comfortable."
         pause 0.3
-        #scene bg
+        scene bg desk
         "Leon sits at a makeshift desk with bills and a calculator."
         pause
-        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l frowning "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "After paying rent, insurance, and other essentials, you have $2,300 left. How would you like to distribute this?"
         pause 0.6
@@ -214,7 +224,7 @@ label scene3:
         menu:
             "Attend with a Budget":
                 scene bg restaurant
-                show leon suit at right with fade
+                show leon suit at right
                 "Leon, with a spirited choice, decides to attend the social event hosted by MeoWorks."
                 pause 0.3
                 "The venue is aglow with soft lights, and the chatter of fellow colleagues fills the air. Leon, with a smile, engages in conversations, makes connections, and even shares a few laughs."
@@ -223,7 +233,7 @@ label scene3:
                 pause 0.3
                 jump scene4
             "Regretfully Decline":
-                scene bg full room
+                scene bg night room
                 show leon depressed at center
                 "Leon, hesitating, decides not to attend the MeoWorks social event. As the night unfolds without him, a sense of regret lingers in the air."
                 l"Maybe I should have gone. Missed out on a chance to connect. Well, there's always next time, right?"
@@ -298,15 +308,17 @@ label scene4:
     scene bg front desk
     "Leon walks into a local bank to inquire about savings account plans."
     pause 0.4
-    "Bank Representative" "Welcome! How can I assist you today?"
+    show accountant work at right
+    show leon suit at left
+    a "Welcome! How can I assist you today?"
     pause 0.5
     "Guide Leon through the options and help him choose a savings plan that aligns with his financial goals and current savings"
     pause 0.4
-    l frowning"{b}Tiered Savings - 2.0%% APY, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?"
+    a "{b}Tiered Savings - 2.0%% APY, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?"
     pause 0.6
-    l "{b}Flexible Savings - 1.2%% APY,  no commitment: {/b}I need some flexibility. Are there plans that allow withdrawals without penalties? A lower interest rate is fine if I can access my money when needed"
+    a "{b}Flexible Savings - 1.2%% APY,  no commitment: {/b}I need some flexibility. Are there plans that allow withdrawals without penalties? A lower interest rate is fine if I can access my money when needed"
     pause 0.6
-    l "{b}Long-Term Savings - 1.8%% APY, Requires $600 Minimum, 3-year commitment: {/b}I'm thinking long-term. Are there plans with better benefits if I commit to saving for a certain period? I'm willing to commit for three years."
+    a "{b}Long-Term Savings - 1.8%% APY, Requires $600 Minimum, 3-year commitment: {/b}I'm thinking long-term. Are there plans with better benefits if I commit to saving for a certain period? I'm willing to commit for three years."
     pause 0.6
     if s_800:
         menu:
@@ -327,6 +339,7 @@ label scene4:
                 "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
                 "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
                 pause 0.5
+                $ flex = True
                 jump scene5
             "Long Term Savings":
                 scene bg comm street
@@ -377,6 +390,7 @@ label scene4:
                 "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
                 "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
                 pause 0.5
+                $ flex = True
                 jump scene5
             "Long Term Savings":
                 "Leon, opting for a challenging savings plan, finds himself struggling to make ends meet. Overwhelmed, he reluctantly seeks financial help from his parents, his pride wounded."
@@ -419,7 +433,7 @@ label scene5:
             jump scene6
         "Biking or Walking":
             if B:
-                scene bg 
+                scene bg bike
                 show leon depressed
                 "Leon, worn and haggard from the long biking or walking commute to his distant office, arrives fatigued. The extended travel time takes a toll, leaving him drained and impacting his productivity."
                 pause 0.6
@@ -438,14 +452,467 @@ label scene5:
 
 
 label scene6:
-    return
+    scene bg desk
+    show leon frowning at right
+    "Leon receives his credit card statement with a balance. The minimum payment is calculated at 2.5%% of the outstanding balance."
+    pause 0.4
+    hide leon frowning
+    l frowning "What's the best approach to handle my credit card payment? How does this minimum payment affect my overall debt?"
+    pause 0.3
+    p "Credit card math can be tricky. Let's break down the numbers."
+    pause 0.3
+    l "{b}Minimum Pay: {/b}I'll pay only the minimum this month to free up some cash. It shouldn't be a big deal, right?"
+    pause 0.6
+    l "{b}More than Minimum: {/b}I'll pay more than the minimum to chip away at the balance faster. How much extra should I pay to make a significant impact?"
+    pause 0.6
+    l "{b}Change Card Plan: {/b}Maybe I can transfer the balance to a lower-interest card. How much will that save me in the long run?"
+    pause 0.6
+    menu:
+        "Minimum Pay":
+            show bg comm street
+            l depressed "I should have paid my interests at time, now its spiraling more."
+            pause 0.3
+            "The spirit watches over leon worriedly, regretting its suggestion at that time."
+            $ b_end = True
+            jump end
+        "More than Minimum":
+            show bg busy streett
+            l smiling "I'm so happy that I paid them properly!"
+            pause 0.2
+            jump scene7
+        "Change Card Plan":
+            if d_none:
+                scene phone shop
+                "Leon, seeking financial prudence, switches to a lower-interest credit card. However, as the need for a new phone arises, the realization hits hard—"
+                pause 0.1
+                "he's limited by his financial choices. A cloud of regret and depression looms over him as the desire for a necessary upgrade clashes with the constraints of his current situation"
+                pause 0.2
+                $ cred = True
+                jump scene7
+            else:
+                scene bg busy streett
+                l smiling "I'm so happy that I changed my card plan. I have enough allocated for extra charges, this makes life so easier!"
+                pause 0.2
+                jump scene7
+
+label scene7:
+    scene bg desk
+    "Leon is evaluating his financial goals and considers setting a target for his emergency fund using his discretionary savings. He's uncertain about the right amount and how it aligns with his lifestyle and expenses."
+    pause 0.2
+    l frowning "I know having an emergency fund is important, but how much should I aim to save from my discretionary savings? What factors should I consider?"
+    if d_1500:
+        p "Setting an emergency fund target is a smart move. Let's break it down. Your monthly discretionary savings are $1,500. How much of it is essential?"
+        pause 0.2
+        l frowning "Well, I need to keep some for social events maybe around $50-100, and also save up some for furnishing our home"
+        pause 0.2
+        p "Great, consider how many months' worth of essential expenses you'd like to have in your emergency fund. A common recommendation is three to six months"
+        pause 0.2
+        l "Considering my job stability and the industry, aiming for a four-month emergency fund should be reasonable. That would be around $8,600."
+        pause 0.3
+        l "{b}Aggresive Saving: {/b}I'll cut down on discretionary spending and all of my $1,500 towards my emergency fund. It might mean sacrificing some extras, but it's worth the security."
+        pause 0.6
+        l "{b}Gradual Build-Up: {/b}I'll aim for the four-month target but gradually build it up over the next six months by allocating $400 initially and increase upto $700. This way, I can still enjoy some of the things I like without drastic lifestyle changes."
+        pause 0.6
+        l "{b}Split Debt: {/b}I have some debts to pay off. I'll allocate a portion of my discretionary savings, maybe around $800 to clear debts and the rest towards building up my emergency fund. How does that sound?"
+        pause 0.6
+        menu:
+            "Aggresive Saving":
+                scene bg busy streett
+                show leon formals at right
+                if cred:
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                else:
+                    l "Ughh, I only have enough to spend for my bare essentials, my lifestyle keeps detoriating"
+                    pause 0.2
+                    "Frustrated and angry about his lost lifestyle, Leon becomes temperamental"
+                    pause 0.1
+                    "The spirit tries to comfort Leon but ultimately stops, hesistating and driven with guilt"
+                    $ b_end = True
+                    jump end
+            "Gradual Build-Up":
+                if cred:
+                    scene bg night room
+                    "Leon's choice of credit plan limits his financial options and in the end, he never gets to grow his emergency fund"
+                    pause 0.2
+                    "Frustrated and regretting his choices, Leon loses confidence in himself"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon becomes more indecisive"
+                    $ b_end = True
+                    jump end
+                else:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+            "Split Debt":
+                if cred:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                if not cred:
+                    scene bg night room
+                    "Leon has not built up even half his emergency fund when rumours of recession started going around."
+                    pause 0.2
+                    "Frustrated about his wrong choice, Leon becomes anxious about the future"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon's anxiety grows"
+                    $ b_end = True
+                    jump end
+    elif d_1200:
+        p "Setting an emergency fund target is a smart move. Let's break it down. Your monthly discretionary savings are $1,500. How much of it is essential?"
+        pause 0.1
+        "{b}Aggressive Saving: {/b}I'll cut down on discretionary spending and allocate the majority of my $1,000 towards my emergency fund. It might mean sacrificing some extras, but it's worth the security."
+        pause 0.6
+        "{b}Gradual Build-Up: {/b}I'll aim for the four-month target but gradually build it up over the next six months from $200 to $600. This way, I can still enjoy some of the things I like without drastic lifestyle changes."
+        pause 0.6
+        "{b}Split Debt{/b} :I have some debts to pay off. I'll allocate a portion of my discretionary savings to clear debts  for $800 and the rest of $400 towards building up my emergency fund. How does that sound?"
+        pause 0.6
+        menu:
+            "Aggresive Saving":
+                scene bg busy streett
+                show leon formals at right
+                if cred:
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                else:
+                    scene bg night room
+                    show leon depressed
+                    l "Ughh, I only have enough to spend for my bare essentials, my lifestyle keeps detoriating"
+                    pause 0.2
+                    "Frustrated and angry about his lost lifestyle, Leon becomes temperamental"
+                    pause 0.1
+                    "The spirit tries to comfort Leon but ultimately stops, hesistating and driven with guilt"
+                    $ b_end = True
+                    jump end
+            "Gradual Build-Up":
+                if cred:
+                    scene bg night room
+                    show leon depressed
+                    "Leon's choice of credit plan limits his financial options and in the end, he never gets to grow his emergency fund"
+                    pause 0.2
+                    "Frustrated and regretting his choices, Leon loses confidence in himself"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon becomes more indecisive"
+                    $ b_end = True
+                    jump end
+                else:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+            "Split Debt":
+                if cred:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                if not cred:
+                    scene bg night room
+                    show leon depressed
+                    "Leon has not built up even half his emergency fund when rumours of recession started going around."
+                    pause 0.2
+                    "Frustrated about his wrong choice, Leon becomes anxious about the future"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon's anxiety grows"
+                    $ b_end = True
+                    jump end
+    else:
+        p "Setting an emergency fund target is a smart move. Let's break it down. Your monthly discretionary savings are $800. How much of it is essential?"
+        pause 0.1
+        "{b}Aggressive Saving: {/b}I'll cut down on discretionary spending and allocate the majority of my $800 towards my emergency fund. It might mean sacrificing some extras, but it's worth the security."
+        pause 0.6
+        "{b}Gradual Build-Up: {/b}I'll aim for the four-month target but gradually build it up over the next six months from $100 to $500. This way, I can still enjoy some of the things I like without drastic lifestyle changes."
+        pause 0.6
+        "{b}Split Debt{/b} :I have some debts to pay off. I'll allocate a portion of my discretionary savings to clear debts  for $400 and the rest of $400 towards building up my emergency fund. How does that sound?"
+        pause 0.6
+        menu:
+            "Aggresive Saving":
+                scene bg busy streett
+                show leon formals at right
+                if cred:
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                else:
+                    scene bg night room
+                    show leon depressed
+                    l "Ughh, I only have enough to spend for my bare essentials, my lifestyle keeps detoriating"
+                    pause 0.2
+                    "Frustrated and angry about his lost lifestyle, Leon becomes temperamental"
+                    pause 0.1
+                    "The spirit tries to comfort Leon but ultimately stops, hesistating and driven with guilt"
+                    $ b_end = True
+                    jump end
+            "Gradual Build-Up":
+                if cred:
+                    scene bg night room
+                    show leon depressed
+                    "Leon's choice of credit plan limits his financial options and in the end, he never gets to grow his emergency fund"
+                    pause 0.2
+                    "Frustrated and regretting his choices, Leon loses confidence in himself"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon becomes more indecisive"
+                    $ b_end = True
+                    jump end
+                else:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+            "Split Debt":
+                if cred:
+                    scene bg busy streett
+                    show leon formals at right
+                    l "I'm so happy to finally build up my emergency fund. It really takes a lot of weight off my shoulders that I didn't even realize I carried. Thank you!"
+                    pause 0.2
+                    hide leon formals
+                    "The spirit is very pleased to see Leon jumping with joy"
+                    $ emf = True
+                    jump scene8
+                if not cred:
+                    scene bg night room
+                    show leon depressed
+                    "Leon has not built up even half his emergency fund when rumours of recession started going around."
+                    pause 0.2
+                    "Frustrated about his wrong choice, Leon becomes anxious about the future"
+                    pause 0.3
+                    "The spirit watches worriedly and guiltily as Leon's anxiety grows"
+                    $ b_end = True
+                    jump end
+        
+
+label scene8:
+    scene bg laptop shop out
+    "Leon finds himself in a tech upgrade dilemma. His laptop, essential for his work as a software engineer, is getting outdated. He ponders whether to invest in a new one, repair the existing one, or explore budget-friendly alternatives."
+    pause 0.5
+    l frowning "My laptop is definitely showing signs of age. Should I invest in a new one, try to repair this one, or explore more budget-friendly alternatives?"
+    pause 0.1
+    p "A tech upgrade is a significant decision. Let's weigh the options. What's the current state of your laptop, and how critical is it for your work?"
+    pause 0.2
+    l "It's slowing down, and I've noticed lag during my coding sessions. It's crucial for my work as a software engineer, and I can't afford significant downtime."
+    pause 0.2
+    p "Understood. Now, let's explore your options for resolving this tech upgrade dilemma."
+    pause 0.1
+    "{b}Invest in a High-End Laptop:{/b}Considering your work demands, investing in a high-end laptop with powerful specs might ensure smooth performance and longevity. It's a significant upfront cost but could be a solid investment, cost $1500."
+    pause 0.5
+    "{b}Repair and Upgrade Current Laptop: {/b}If your current laptop has potential and sentimental value, investing in repairs and upgrades might be a cost-effective option. It could extend its lifespan for another year or two. Option Cost:$300"
+    pause 0.5
+    "{b}Explore Budget-Friendly Alternatives: {/b}Consider exploring budget-friendly alternatives. This could be a mid-range laptop that meets your essential needs without the hefty price tag. It might not have all the bells and whistles but could get the job done. Option Cost:$800"
+    pause 0.5
+    menu:
+        "Invest in High-End Laptop":
+            if not d_1200 and not flex:
+                scene bg night room
+                show leon depressed
+                "Leon succumbs to the allure of a high-priced laptop, investing a significant chunk of his funds. The aftermath is an overworked and tired Leon, with dwindling resources."
+                pause 0.2
+                "Strained by the weight of financial decisions, he reluctantly turns to his parents for assistance. The convergence of exhaustion and financial pressure casts a shadow of depression over him."
+                pause 0.2
+                $ b_end = True
+                jump end
+            else:
+                scene bg laptop shop
+                show leon formals at left
+                l "I'd like to get the latest V21 Laptop on display 9"
+                pause 0.1
+                "......."
+                "......."
+                scene bg comm street
+                show leon formals at center with move
+                l "Yes! This is the laptop I bought on my own! I'm so happy"
+                pause 0.1
+                "The spirit watches Leon fondly as he excitedly went home"
+                jump scene9
+        "Repair and Upgrade Current Laptop":
+            scene bg laptop shop
+            show leon formals at left
+            l "Hello, I'd like to have my laptop repaired, is that service available?"
+            pause 0.1
+            "......."
+            "......."
+            scene bg comm street
+            show leon formals at center with move
+            l "Yes! This one is finally fixed! It's faster than ever, I'm so happy"
+            pause 0.1
+            "The spirit watches Leon fondly as he excitedly went home"
+            jump scene9
+        "Explore Budget-Friendly Alternatives":
+            scene bg laptop shop
+            show leon formals at left
+            l "Hello, I'd like to buy the older versioned Zen8 Laptop, is that Available?"
+            pause 0.1
+            "......."
+            "......."
+            scene bg comm street
+            show leon formals at center with move
+            l "Yes! This one was what I wanted to get in my college days! And now, I bought it with my own money!"
+            pause 0.1
+            "The spirit watches Leon fondly as he excitedly went home"
+            jump scene9
+
+label scene9:
+    scene bg insurance building
+    "Leon realizes that he needs to choose a health insurance plan. He’s never had to do this before and is unsure about how much coverage he needs and how much he can afford."
+    pause 0.4
+    show leon formals at left
+    l "I need to choose a health insurance plan, but I’m not sure what to look for. How much coverage do I need? And how much can I afford?"
+    pause 0.2
+    p "Choosing a health insurance plan is an important decision, Leon. Let’s consider your options based on your health needs and budget."
+    pause 0.2
+    scene bg insurance inside
+    show insurance agent work at right
+    show leon formals at left
+    i "{b}High Coverage Plan:{/b} A high coverage plan would have higher premiums, but it would cover most of your medical expenses. This could be a good option if you have ongoing health issues or want peace of mind knowing you’re covered for most health situations."
+    pause 0.5
+    i "{b}Medium Coverage Plan:{/b} A medium coverage plan would have lower premiums than a high coverage plan, but it wouldn’t cover as much. This could be a good option if you’re generally healthy but want to be covered for common health issues."
+    pause 0.5
+    i "{b}Low Coverage Plan:{/b} A low coverage plan would have the lowest premiums, but it would also provide the least coverage. This could be a good option if you’re very healthy and only want coverage for emergency situations."
+    pause 0.5
+    hide insurance agent work
+    menu:
+        "High Coverage Plan":
+            if d_none or not flex:
+                scene bg night room
+                show leon depressed at center
+                "Leon, unable to afford high-coverage insurance, overworks to make ends meet. The relentless grind takes a toll, leaving him fatigued and impacting his performance at work."
+                "As mistakes accumulate, a sense of depression envelops Leon, a consequence of the challenging balance between financial constraints and professional demands."
+                pause 0.2
+                "The spirit grows increasingly worried and beats itself up for its wrong guidance"
+                $ b_end = True
+                jump end
+            else:
+                show bg busy streett
+                show leon formals
+                "Leon, elated with his decision for a high-coverage insurance plan, walks home with a newfound sense of security."
+                "The weight of financial worry lifted, he carries a lightness in his steps, savoring the contentment that comes with making thoughtful and beneficial choices."
+                pause 0.3
+                $ hcover = True
+                jump scene10
+        "Medium Coverage Plan":
+            show bg busy streett
+            show leon formals
+            "Leon, elated with his decision for a medium-coverage insurance plan, walks home with a newfound sense of security."
+            "The weight of financial worry lifted, he carries a lightness in his steps, savoring the contentment that comes with making thoughtful and beneficial choices."
+            pause 0.1
+            $ mcover = True
+            jump scene10
+        "Low Coverage Plan":
+            if not cred and not d_none:
+                scene bg busy streett
+                show leon sad
+                "As summer intensifies, Leon begins to regret his choice of a low-coverage insurance plan. The scorching heat exposes the gaps in his coverage, leaving him uneasy and wishing he had opted for a more comprehensive policy."
+                pause 0.1
+                "The realization dawns as regret casts a shadow over his sense of security."
+                $ lcover = True
+                jump scene10
+            else:
+                show bg busy streett
+                show leon formals
+                "Leon, elated with his decision for a low-coverage insurance plan, walks home with a newfound sense of security."
+                "The weight of financial worry lifted, he carries a lightness in his steps, savoring the contentment that comes with making thoughtful and beneficial choices."
+                pause 0.3
+                $ lcover = True
+                jump scene10
+
+label scene10:
+    scene bg hospital in
+    "After choosing his health insurance plan, Leon faces his first health crisis. He had a minor accident at home and had to visit the emergency room. Now, he’s faced with a significant medical bill and needs to figure out how to handle it."
+    scene bg hospital room
+    show leon injured at left
+    show hospital nurse work at right
+    if hcover:
+        n "Since you chose the high coverage plan, most of your medical expenses should be covered. You’ll need to pay the deductible and any copayments, but the insurance should cover the rest."
+        pause 0.2
+        scene bg hospital out
+        show leon injured at right
+        l "Thank god, I chose the high coverage plan! I would be toast if I chose a wrong plan!"
+        pause 0.2
+        p "The spirit follows Leon home, worried and amused"
+        pause 0.2
+        
+
+    elif mcover:
+        if (d_none or not flex and s_1500) or not emf:
+            n "With the medium coverage plan, common medical expenses are covered. You’ll need to pay the deductible, any copayments, and possibly some additional costs if not everything is covered"
+            pause 0.2
+            scene bg hospital out
+            show leon injured at left
+            "With a medium-coverage insurance plan, Leon faces a minor emergency requiring deductibles. However, lacking quick cash on hand, regret seeps in."
+            "He wishes he had prepared better for unforeseen situations, realizing the importance of having immediate funds for unexpected emergencies."
+            $ b_end = True
+            jump end
+        else:
+            n "With the medium coverage plan, common medical expenses are covered."
+            "You’ll need to pay the deductible, any copayments, and possibly some additional costs if not everything is covered"
+            pause 0.2
+            scene bg hospital out
+            show leon injured at right
+            l "Thank god, I chose the medium coverage plan and had some emergency fund at hand! I would be toast if I chose a wrong plan!"
+            pause 0.2
+            p "The spirit follows Leon home, worried and amused"
+            pause 0.2
+        
+    elif lcover:
+        if (d_none and s_1500 ) or (not cred and not flex) or (not emf):
+            n "The low coverage plan only covers emergency medical expenses. Depending on the specifics of your plan, you may need to pay a significant portion of the bill yourself."
+            scene bg hospital out
+            show leon injured at left
+            "Leon, burdened by a low-coverage insurance plan that falls short, faces a situation demanding more than it offers."
+            pause 0.1
+            "With no cash at hand, he reluctantly turns to his parents for financial help. The weight of dependence and limited coverage sinks him into a state of depression, highlighting the consequences of financial vulnerability."
+            pause 0.4
+            $ b_end = True
+            jump end
+        else:
+            n "The low coverage plan only covers emergency medical expenses. Depending on the specifics of your plan, you may need to pay a significant portion of the bill yourself."
+            scene bg hospital out
+            show leon injured at left
+            l "Thank goodness, I kept some money at hand, I should definitely upgrade my insurance plan!"
+            pause 0.4
+            jump end
 
 
 label end:
     if b_end:
         '{color=#fd1200}{b}Bad Ending{/b}{/color}'
-       
         pause 0.8
         return
     else:
+        '{b}{color=#0a6522}Happy Ending{/b}{/color}'
+        "Congratulations on reaching the end! But hey, more trickier questions will come up soon."
+        pause 0.4
+        "Along with more interesting people to help......"
         return
