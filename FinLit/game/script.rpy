@@ -15,7 +15,8 @@ default d_none = False
 default s_800 = False
 default s_500 = False
 default s_1500 = False
-
+default reg_dec =False
+default b_end = False
 # The game starts here.
 
 label start:
@@ -58,14 +59,14 @@ label scene1:
     "The player, the secret spirit, appears beside him."
     "Leon furrows his brows, contemplating the apartment listings"
     pause 0.3
-    l "Alright, I need to make a decision. Let's break these down. Option A is close but pricier. Option B is affordable, but that commute... and Option C seems like a middle ground. What do you think?"
+    l"Alright, I need to make a decision. Let's break these down. Option A is close but pricier. Option B is affordable, but that commute... and Option C seems like a middle ground. What do you think?"
     p "Let's factor in your budget. How much are these places approximately, and what's your monthly salary?"
-    l "My salary for this month is $3500"
-    l "Option A ,This one is just a short walk from the office. No more long commutes, but it's a bit expensive . But its a quite residential area with everything available at hand. Can I afford it?"
+    l"My salary for this month is $3500"
+    l"Option A ,This one is just a short walk from the office. No more long commutes, but it's a bit expensive . But its a quite residential area with everything available at hand. Can I afford it?"
     pause 0.6
-    l "Option B, This place is much more budget-friendly, but the commute would be longer. It has a commercial street nearby though with cheaper goods. Will it be worth the savings?"
+    l"Option B, This place is much more budget-friendly, but the commute would be longer. It has a commercial street nearby though with cheaper goods. Will it be worth the savings?"
     pause 0.6
-    l "Option C, This one seems balanced—affordable and not too far from work, but I still need to spend time commuting. It is also in a busy street. But is it the right compromise?"
+    l"Option C, This one seems balanced—affordable and not too far from work, but I still need to spend time commuting. It is also in a busy street. But is it the right compromise?"
     pause 0.6
     menu:
         "Closer to work":
@@ -83,22 +84,22 @@ label scene2:
     #scene bg 
     "Leon stands in front of his new apartment building, key in hand. Excitement fills the air as he opens the door to his new home."
     if A:
-        l "This is it! My own place, right near work. No more long commutes"
+        l"This is it! My own place, right near work. No more long commutes"
         pause 0.3
         p "A great choice! But remember, with great convenience comes greater responsibility. Let's plan your budget and prioritize your expenses."
         pause 0.3
         #scene bg
         "Leon sits at a makeshift desk with bills and a calculator"
         pause
-        l "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "Let's break it down. After paying rent, you have $2,200 left. How would you like to distribute this?"
         pause 0.5
-        l "{b}Prioritize Savings and Essentials:{/b} I'll allocate $700 for essentials like insurance, utilities, and groceries, and $1,500 for savings."
+        l"{b}Prioritize Savings and Essentials:{/b} I'll allocate $700 for essentials like insurance, utilities, and groceries, and $1,500 for savings."
         pause 0.6
-        l "{b}Balanced Approach:{/b} I'll distribute my income evenly. $600 for essentials, $800 for savings, and $800 for discretionary spending."
+        l"{b}Balanced Approach:{/b} I'll distribute my income evenly. $600 for essentials, $800 for savings, and $800 for discretionary spending."
         pause 0.6
-        l "{b}Focus on Comfort and Discretionary Spending:{/b} I want my place to be comfortable. I'll allocate $500 for essentials, $500 for savings, and $1,200 for discretionary spending."
+        l"{b}Focus on Comfort and Discretionary Spending:{/b} I want my place to be comfortable. I'll allocate $500 for essentials, $500 for savings, and $1,200 for discretionary spending."
         pause 0.6
         "Your choices here will shape your financial stability. What's most important to you right now, and how can we balance your priorities with the remaining budget"
         pause 0.6
@@ -116,22 +117,22 @@ label scene2:
                 $ s_500 = True
                 jump scene3
     elif B:
-        l "This place might be a bit far, but it's affordable. Let's make it home."
+        l"This place might be a bit far, but it's affordable. Let's make it home."
         pause 0.3
         p "A practical choice! Now, let's plan your budget and make sure you're set for the month."
         pause 0.3
         #scene bg 
         "Leon sits at a makeshift desk with bills and a calculator."
         pause 
-        l "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "After paying rent, insurance, and other essentials, you have $2,700 left. How would you like to distribute this?"
         pause 0.6
-        l "{b}Prioritize Savings and Essentials:{/b} I'll allocate $1,000 for essentials like insurance, utilities, commute and groceries, $200 for emergencies and $1,500 for savings."
+        l"{b}Prioritize Savings and Essentials:{/b} I'll allocate $1,000 for essentials like insurance, utilities, commute and groceries, $200 for emergencies and $1,500 for savings."
         pause 0.6
-        l "{b}Balanced Approach:{/b} I'll distribute my income evenly. $700 for essentials, $800 for savings, and $1200 for discretionary spending."
+        l"{b}Balanced Approach:{/b} I'll distribute my income evenly. $700 for essentials, $800 for savings, and $1200 for discretionary spending."
         pause 0.6
-        l "{b}Focus on Comfort and Discretionary Spending: {/b}I want to enjoy life too. I'll allocate $700 for essentials, $500 for savings, and $1,500 for discretionary spending."
+        l"{b}Focus on Comfort and Discretionary Spending: {/b}I want to enjoy life too. I'll allocate $700 for essentials, $500 for savings, and $1,500 for discretionary spending."
         pause 0.6
         "Your choices here will shape your financial stability. What's most important to you right now, and how can we balance your priorities with the remaining budget"
         pause 0.6
@@ -149,22 +150,22 @@ label scene2:
                 $ s_500 = True
                 jump scene3
     elif C:
-        l "A balanced choice. Let's make this place feel like home without breaking the bank"
+        l"A balanced choice. Let's make this place feel like home without breaking the bank"
         pause 0.3
         p "A thoughtful decision! Now, let's plan your budget and ensure you're financially comfortable."
         pause 0.3
         #scene bg
         "Leon sits at a makeshift desk with bills and a calculator."
         pause
-        l "Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
+        l"Budgeting... this is tougher than I thought. How do I make sure I have enough for everything?"
         pause 0.3
         p "After paying rent, insurance, and other essentials, you have $2,300 left. How would you like to distribute this?"
         pause 0.6
-        l "{b}Balanced Approach:{/b} I'll distribute my income evenly. $700 for essentials, $800 for savings, and $800 for discretionary spending."
+        l"{b}Balanced Approach:{/b} I'll distribute my income evenly. $700 for essentials, $800 for savings, and $800 for discretionary spending."
         pause 0.6
-        l "{b}Prioritize Savings and Essentials:{/b} I'll allocate $800 for essentials like insurance, utilities, and groceries, and $1,500 for savings."
+        l"{b}Prioritize Savings and Essentials:{/b} I'll allocate $800 for essentials like insurance, utilities, and groceries, and $1,500 for savings."
         pause 0.6
-        l "{b}Focus on Comfort and Discretionary Spending:{/b} I want to enjoy life too. I'll allocate $300 for essentials, $500 for savings, and $1,500 for discretionary spending."
+        l"{b}Focus on Comfort and Discretionary Spending:{/b} I want to enjoy life too. I'll allocate $300 for essentials, $500 for savings, and $1,500 for discretionary spending."
         pause 0.6
         "Your choices here will shape your financial stability. What's most important to you right now, and how can we balance your priorities with the remaining budget"
         pause 0.6
@@ -183,4 +184,191 @@ label scene2:
                 jump scene3
 
 label scene3:
+    #scene bg
+    "Leon receives an invitation to a colleague's dinner party. He contemplates whether to attend or not."
+    pause 0.4
+    l"A dinner party from work... it sounds fun, but with my budget, should I go?"
+    pause 0.4
+    p "Socializing is important. Let's figure out how you can attend without jeopardizing your budget."
+    pause 0.4
+    l"I want to be a part of the team, but I also need to be mindful of my budget. What should I do?"
+    pause 0.4
+    p "You can attend without overspending. How would you like to approach this?"
+    pause 0.4
+    if d_800 or d_1200 or d_1500:
+        p "How can you strike a balance and enjoy the evening without overspending? Consider your allocated $800 budget for discretionary spending when deciding on the amount for this event."
+        pause 0.6
+        l"{b}Attend with a Budget:{/b} I'll allocate $150 for the dinner party. Maybe eat something light before going to save on expenses."
+        pause 0.6
+        l"{b}Regretfully Decline: {/b}I'll skip this one to stay within my budget. I'll explain to my colleagues later. It's unfortunate, but necessary."
+        pause 0.6
+        l"{b}Attend Splendidly: {/b}It's a special occasion. I'll allocate $300 for the dinner party and enjoy myself. I'll figure out the budget later"
+        pause 0.6
+        menu:
+            "Attend with a Budget":
+                #scene bg
+                "Leon, with a spirited choice, decides to attend the social event hosted by MeoWorks."
+                pause 0.3
+                "The venue is aglow with soft lights, and the chatter of fellow colleagues fills the air. Leon, with a smile, engages in conversations, makes connections, and even shares a few laughs."
+                pause 0.6          
+                "As the event winds down, the secret spirit senses Leon's positive energy. It whispers in the unseen realm, pleased with the choice."
+                pause 0.3
+                jump scene4
+            "Regretfully Decline":
+                #scene bg
+                #show
+                "Leon, hesitating, decides not to attend the MeoWorks social event. As the night unfolds without him, a sense of regret lingers in the air."
+                l"Maybe I should have gone. Missed out on a chance to connect. Well, there's always next time, right?"
+                "The secret spirit, observing silently, notes the subtle pang of remorse in Leon's voice, feeling regretful"
+                $ reg_dec = True
+                jump scene3_alias
+            "Attend Splendidly":
+                #scene bg
+                "Leon, with a hesistant attitude, decides to attend the social event hosted by MeoWorks."
+                pause 0.3
+                "The venue is aglow with soft lights, and the chatter of fellow colleagues fills the air. Leon, with a smile, engages in conversations, makes connections, and even shares a few laughs."
+                pause 0.6          
+                "As the event winds down, the secret spirit senses Leon's depressed energy. It whispers in the unseen realm, regretting the choice."
+                pause 0.3
+                jump scene4
+    else:
+        jump scene3_alias        
+label scene3_alias:         
+    if d_none or reg_dec:
+        "Leon, torn by budget concerns, since he did not allocate a discretionary budget, decides to forego the dinner party to stay within his financial limits."
+        pause 0.4
+        "The next day at work, he overhears excited chatter about the dinner party—discussions about potential projects and networking opportunities that he missed out on. The company announces its annual meet, another chance for crucial connections and discussions."
+        pause 0.6
+        "Colleagues encourage him to attend, emphasizing its importance for career growth. Leon, still constrained by his budget, faces a difficult decision."
+        pause 0.6
+        "{b}Attend:{/b} Leon chooses to attend the annual meet with a tight budget, compromising on potential networking opportunities."
+        pause 0.6
+        "{b}Regretfully Decline Again:{/b} Leon, sticking to his financial plan, decides to skip the annual meet, sacrificing potential career advancements."
+        pause 0.6
+        "{b}Attend and Overstep Budget:{/b} Desperate not to miss out, Leon allocates extra funds for the meet, even if it means jeopardizing his financial stability. "
+        menu:
+            "Attend":
+                jump scene4
+            "Regretfully Decline Again":
+                #scene bg
+                #how
+                "Leon overhears excited whispers in the office—the buzz of a close colleague securing a golden opportunity from the social event. Regret creeps in, gnawing at him, as he reflects on missed chances."
+                pause 0.8
+                l"I could have been there, made an impression. Now, I'm stuck, and opportunities slip away. If only I had budgeted better."
+                pause 0.6
+                l"Melancholy shadows Leon's expression as the realization of financial choices weighs heavily on his aspirations."
+                pause 0.6
+                $ b_end = True
+                jump end
+            "Attend and Overstep Budget":
+                #scene bg 
+                #show
+                "In the dimly lit confines of his one-bedroom rental, Leon grapples with financial strain. The empty fridge echoes his struggle as he dials his parents, swallowing pride, to borrow a lifeline."
+                pause 0.8
+                l"This is tougher than I thought. A missed paycheck and now this... Maybe I'm not cut out for this adulting thing."
+                pause 0.6
+                l"As the weight of financial pressure bears down, a cloud of depression settles over Leon's once hopeful spirit."
+                pause 0.6
+                $ b_end = True
+                jump end 
+        
+
+label scene4:
+    #scene bg
+    "Leon, ready with his savings, found a pleasant day to visit the bank for creating a savings account"
+    pause 0.6
+    l"It's time to make my money work for me. Let's check out some savings account plans"
+    pause 0.4
+    p "Absolutely! Let's look for a plan that aligns with your financial goals and helps your money grow."
+    pause 0.4
+    #scene bg
+    "Leon walks into a local bank to inquire about savings account plans."
+    pause 0.4
+    "Bank Representative" "Welcome! How can I assist you today?"
+    pause 0.5
+    "Guide Leon through the options and help him choose a savings plan that aligns with his financial goals and current savings"
+    pause 0.4
+    l "{b}Tiered Savings - 2.0%% APY, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?"
+    pause 0.6
+    l "{b}Flexible Savings - 1.2%% APY,  no commitment: {/b}I need some flexibility. Are there plans that allow withdrawals without penalties? A lower interest rate is fine if I can access my money when needed"
+    pause 0.6
+    l "{b}Long-Term Savings - 1.8%% APY, Requires $600 Minimum, 3-year commitment: {/b}I'm thinking long-term. Are there plans with better benefits if I commit to saving for a certain period? I'm willing to commit for three years."
+    pause 0.6
+    if s_800:
+        menu:
+            "Tiered Savings":
+                #scene bg
+                #show 
+                "Leon, opting for a challenging savings plan, finds himself struggling to make ends meet. Overwhelmed, he reluctantly seeks financial help from his parents, his pride wounded."
+                pause 0.7
+                "The weight of financial strain casts a shadow over his once optimistic spirit, leaving him in a state of deep depression."
+                pause 0.6
+                $ b_end= True
+                jump end
+            "Flexible Savings":
+                "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
+                "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
+                pause 0.5
+                jump scene5
+            "Long Term Savings":
+                "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
+                "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
+                pause 0.5
+                jump scene5
+    elif s_1500:
+        menu:
+            "Tiered Savings":
+                #scene bg
+                #show 
+                "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
+                "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
+                pause 0.5
+                jump scene5
+            "Flexible Savings":
+                "Leon, disheartened, examines his meager savings from the simple plan. The pitifully small amount falls short of his expectations, fueling a sense of disappointment and financial frustration."
+                pause 0.5
+                "Leon, immersed in regret, grapples with a cloud of depression. The weight of missed opportunities and the thought of potential savings with a different plan haunt him, casting a shadow over his once hopeful demeanor."
+                pause 0.6
+                $ b_end = True
+                jump end
+            "Long Term Savings":
+                "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
+                "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
+                pause 0.5
+                jump scene5
+    elif s_500:
+        menu:
+            "Tiered Savings":
+                #scene bg
+                #show 
+                "Leon, opting for a challenging savings plan, finds himself struggling to make ends meet. Overwhelmed, he reluctantly seeks financial help from his parents, his pride wounded."
+                pause 0.7
+                "The weight of financial strain casts a shadow over his once optimistic spirit, leaving him in a state of deep depression."
+                pause 0.6
+                $ b_end= True
+                jump end
+            "Flexible Savings":
+                "Leon, content with his thoughtful financial decisions, revels in the satisfaction of achieving stability."
+                "A sense of pride lights up his face, and the secret spirit silently applauds the success of wise choice"
+                pause 0.5
+                jump scene5
+            "Long Term Savings":
+                "Leon, opting for a challenging savings plan, finds himself struggling to make ends meet. Overwhelmed, he reluctantly seeks financial help from his parents, his pride wounded."
+                pause 0.7
+                "The weight of financial strain casts a shadow over his once optimistic spirit, leaving him in a state of deep depression."
+                pause 0.6
+                $ b_end= True
+                jump end
+
+label scene5:
     return
+
+
+label end:
+    if b_end:
+        define red = "#FF0000"
+        "{color=red}{b}BAD ENDING{/b}{/color}"
+        pause 0.8
+        return
+    else:
+        return

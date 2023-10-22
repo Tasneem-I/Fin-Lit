@@ -1,15 +1,15 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While processing the color property of anonymous style:
-  File "game/script.rpy", line 33, in script
-    p "You've created a new Ren'Py game."
-ValueError: invalid literal for int() with base 16: '[p'
+While processing text tag {/b} in "{b}Tiered Savings{/b} - 2.0%, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?".:
+  File "game/script.rpy", line 291, in script
+    l "{b}Tiered Savings{/b} - 2.0%%, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?"
+Exception: '/b' closes a text tag that isn't open.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 33, in script
-    p "You've created a new Ren'Py game."
+  File "game/script.rpy", line 291, in script
+    l "{b}Tiered Savings{/b} - 2.0%%, Requires $1000 Minimum, 1.5 year commitment:{/b} I'm open to a bit of commitment. What's the deal with your Tiered Savings? Does it offer better returns with a higher balance?"
   File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\ast.py", line 930, in execute
     renpy.exports.say(who, what, *args, **kwargs)
   File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\exports.py", line 1474, in say
@@ -24,39 +24,49 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 3582, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 4055, in interact_core
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\screen.py", line 481, in visit_all
-    self.child.visit_all(callback, seen=None)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 684, in visit_all
-    d.visit_all(callback, seen)
-  [Previous line repeated 1 more time]
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 686, in visit_all
-    callback(self)
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 4055, in <lambda>
-    root_widget.visit_all(lambda d : d.per_interact())
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\text\text.py", line 1792, in per_interact
-    if self.style.slow_abortable:
-  File "gen3-static/styleclass.pxi", line 533, in renpy.styledata.styleclass.Style.slow_abortable.__get__
-  File "style.pyx", line 493, in renpy.style.StyleCore._get
-  File "style.pyx", line 710, in renpy.style.build_style
-  File "style.pyx", line 707, in renpy.style.build_style
-  File "gen3-static/style_functions.pyx", line 323, in style_functions.color_property
-  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\color.py", line 152, in __new__
-    r = int(c[0]+c[1], 16)
-ValueError: invalid literal for int() with base 16: '[p'
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 4175, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\core.py", line 2782, in draw_screen
+    surftree = renpy.display.render.render_screen(
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 888, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 888, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 888, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\screen.py", line 731, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 888, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 1338, in render
+    surf = render(child,
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\display\layout.py", line 888, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\text\text.py", line 2171, in render
+    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\text\text.py", line 629, in __init__
+    self.paragraphs = self.segment(text.tokens, style, renders, text)
+  File "C:\Users\ibrah\OneDrive\Documents\A game renpy\renpy-8.1.3-sdk\renpy\text\text.py", line 1066, in segment
+    raise Exception("%r closes a text tag that isn't open." % text)
+Exception: '/b' closes a text tag that isn't open.
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.1.3.23091805
 FinLit 1.0
-Sun Oct 22 00:02:19 2023
+Sun Oct 22 07:08:59 2023
