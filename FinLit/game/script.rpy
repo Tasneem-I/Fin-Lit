@@ -361,13 +361,56 @@ label scene4:
                 jump end
 
 label scene5:
+    #scene bg
+    "Leon is facing a dilemma regarding his daily commute to work. His choices impact both his time and budget."
+    l "My commute is taking a toll. How can I optimize it without breaking the bank?"
+    p "Balancing time and budget for your commute is crucial. Let's explore your options."
+    l "{b}Public Transportation:{/b} I can take public transportation. It's cost-effective, but it might take longer. How does it align with my budget?"
+    pause 0.6
+    l "{b}Carpooling or Ride Sharing:{/b} Maybe carpooling or ride-sharing can help. How do these options impact both time and cost?"
+    pause 0.6
+    l "{b}Biking or Walking:{/b} What about biking or walking? It's healthy, but how practical is it for my daily commute?"
+    pause 0.6
+    menu:
+        "Public Transportation":
+            if C or B:
+                "Leon, content with his commute choice, enjoys a smooth balance between time and budget. A satisfied smile graces his face as he navigates the city, appreciating the thoughtful decision that enhances both his work-life balance and financial stability."
+                pause 0.7
+                jump scene6
+            elif A:
+                "Leon, discontented with his public transportation choice, weaves through crowded buses and bustling stations for his closeby office. Frustration etches his face as the once-easy commute turns into a daily struggle, overshadowing the satisfaction he sought."
+                pause 0.7
+                jump scene6
+        "Carpooling or Ride Sharing":
+            "Leon, content with his commute choice, enjoys a smooth balance between time and budget. A satisfied smile graces his face as he navigates the city, appreciating the thoughtful decision that enhances both his work-life balance and financial stability."
+            pause 0.7
+            jump scene6
+        "Biking or Walking":
+            if B:
+                "Leon, worn and haggard from the long biking or walking commute to his distant office, arrives fatigued. The extended travel time takes a toll, leaving him drained and impacting his productivity."
+                pause 0.6
+                "A cloud of depression settles over him as the daily grind becomes an overwhelming struggle."
+                pause 0.4
+                $ b_end= True
+                jump end
+            elif A:
+                "Leon, content with his commute choice, enjoys a smooth balance between time and budget. A satisfied smile graces his face as he navigates the city, appreciating the thoughtful decision that enhances both his work-life balance and financial stability."
+                pause 0.7
+                jump scene6
+            elif C:
+                "Leon, slightly fatigued from his commute choices, sacrifices personal time for efficiency. With weariness in his steps, he opts for takeout for dinner, a small compromise in the pursuit of a smoother, albeit tiring, daily routine."
+                pause 0.7
+                jump scene6
+
+
+label scene6:
     return
 
 
 label end:
     if b_end:
-        define red = "#FF0000"
-        "{color=red}{b}BAD ENDING{/b}{/color}"
+        #'{color="#fd1200"}{b}BAD ENDING{/b}{/color}'
+        "Bad Ending"
         pause 0.8
         return
     else:
