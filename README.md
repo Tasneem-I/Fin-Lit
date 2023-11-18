@@ -21,16 +21,16 @@ This project integrates educational content with gamification, fostering an inte
 3. Flask
 
 # Visual Introduction
-1. Main Menu Page
+1. ***Main Menu Page***
 ![dem5](https://github.com/Tasneem-I/Fin-Lit/assets/107906533/48734e67-3c28-49fb-8fa2-29de445a55ce)
 
-2. Story Part 1
+2. ***Story Part 1***
 ![dem4](https://github.com/Tasneem-I/Fin-Lit/assets/107906533/51019605-0698-4531-a032-0bd993bd96f1)
 
-3. Choice 
+3. ***Choice*** 
 ![dem2](https://github.com/Tasneem-I/Fin-Lit/assets/107906533/523ff43a-82f5-49be-9c99-deb9de6978c7)
 
-4. Story Part 2
+4. ***Story Part 2***
 ![dem1](https://github.com/Tasneem-I/Fin-Lit/assets/107906533/42a41820-0062-46b7-9966-1694c7b48057)
 
 
